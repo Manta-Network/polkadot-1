@@ -1,4 +1,4 @@
-// Copyright 2020 Parity Technologies (UK) Ltd.
+// Copyright 2022 Parity Technologies (UK) Ltd.
 // This file is part of Polkadot.
 
 // Polkadot is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 //! `traceID` annotation without codebase turnover.
 
 #[macro_use]
-pub use {Level, event, span, error, warn, debug, tracing};
+pub use tracing::{Level, event, span, error, warn, debug};
 
 #[macro_export]
 macro_rules! info {

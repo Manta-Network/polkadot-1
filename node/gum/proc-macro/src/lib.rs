@@ -28,7 +28,7 @@ pub fn gum(
 	item: proc_macro::TokenStream,
 ) -> proc_macro::TokenStream {
 	let item: TokenStream = item.into();
-	impl_gum(attr, item)
+	impl_gum(item)
 		.unwrap_or_else(|err| err.to_compile_error())
 		.into()
 }
@@ -39,15 +39,15 @@ pub(crate) fn impl_gum(
 	let of: OverseerGuts = parse2(orig)?;
 
 
-	let ts = expander::Expander::new("tracing-gum")
+	let res_ts = expander::Expander::new("tracing-gum")
 		.add_comment("Generated overseer code by `gum!(..)`".to_owned())
 		.dry(!cfg!(feature = "expand"))
 		.verbose(false)
 		.fmt(expander::Edition::_2021)
-		.write_to_out_dir(additive)
+		.maybe_write_to_out_dir(additive)
 		.expect("Expander does not fail due to IO in OUT_DIR. qed");
 
-	Ok(ts)
+	res_ts
 }
 
 fn support_crate() -> TokenStream {
