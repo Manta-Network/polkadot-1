@@ -132,8 +132,35 @@ mod tests {
 	}
 
 	#[test]
-	fn works() {
+	fn t01() {
 		let a = 7;
-		info!(target: "foo", "Something something {a}, {b}, or maybe {c}", %a, b = ?Y::default(), c=a);
+		info!(target: "foo",
+            "Something something {a}, {b:?}, or maybe {c}",
+            b = Y::default(),
+            c = a
+        );
+	}
+
+	#[test]
+	fn t02() {
+		let a = 7;
+		info!(target: "bar",
+            a = a,
+            b = ?Y::default(),
+            "fff {c}",
+            c = a,
+        );
+	}
+
+	#[test]
+	fn t03() {
+		let a = 7;
+		info!(target: "bar",
+            a = a,
+            candidate_hash = 0xFFFFFFF,
+            b = ?Y::default(),
+            c = ?a,
+            "xxx",
+		);
 	}
 }
